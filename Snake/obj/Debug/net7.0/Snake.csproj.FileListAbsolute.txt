@@ -1,0 +1,15 @@
+/Users/thomasdanielsson/lektioner/Snake/Snake/bin/Debug/net7.0/Snake
+/Users/thomasdanielsson/lektioner/Snake/Snake/bin/Debug/net7.0/Snake.deps.json
+/Users/thomasdanielsson/lektioner/Snake/Snake/bin/Debug/net7.0/Snake.runtimeconfig.json
+/Users/thomasdanielsson/lektioner/Snake/Snake/bin/Debug/net7.0/Snake.dll
+/Users/thomasdanielsson/lektioner/Snake/Snake/bin/Debug/net7.0/Snake.pdb
+/Users/thomasdanielsson/lektioner/Snake/Snake/obj/Debug/net7.0/Snake.csproj.AssemblyReference.cache
+/Users/thomasdanielsson/lektioner/Snake/Snake/obj/Debug/net7.0/Snake.GeneratedMSBuildEditorConfig.editorconfig
+/Users/thomasdanielsson/lektioner/Snake/Snake/obj/Debug/net7.0/Snake.AssemblyInfoInputs.cache
+/Users/thomasdanielsson/lektioner/Snake/Snake/obj/Debug/net7.0/Snake.AssemblyInfo.cs
+/Users/thomasdanielsson/lektioner/Snake/Snake/obj/Debug/net7.0/Snake.csproj.CoreCompileInputs.cache
+/Users/thomasdanielsson/lektioner/Snake/Snake/obj/Debug/net7.0/Snake.dll
+/Users/thomasdanielsson/lektioner/Snake/Snake/obj/Debug/net7.0/refint/Snake.dll
+/Users/thomasdanielsson/lektioner/Snake/Snake/obj/Debug/net7.0/Snake.pdb
+/Users/thomasdanielsson/lektioner/Snake/Snake/obj/Debug/net7.0/Snake.genruntimeconfig.cache
+/Users/thomasdanielsson/lektioner/Snake/Snake/obj/Debug/net7.0/ref/Snake.dll

@@ -39,17 +39,22 @@ class Game
 
     public void Input(ConsoleKey key)
     {
-        map.MoveSnake(key.ToString());
+        map.MoveDirection(key.ToString());
     }
 
     void Tick()
     {
+        map.Move();
+        if (map.collision())
+        {
+            GameOver = true;
+        }
         ScheduleNextTick();
     }
 
     void ScheduleNextTick()
     {
         // the game will automatically update itself every half a second, adjust as needed
-        _timer = new ScheduleTimer(500, Tick);
+        _timer = new ScheduleTimer(100, Tick);
     }
 }

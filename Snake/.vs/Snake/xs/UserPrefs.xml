@@ -1,3 +1,5 @@
 ﻿<Properties StartupConfiguration="{F17995A2-C131-4754-9C3A-94FCFAAAD1BD}|Default">
+  <MonoDevelop.Ide.ItemProperties.Snake PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MultiItemStartupConfigurations />
 </Properties>

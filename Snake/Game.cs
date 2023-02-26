@@ -7,13 +7,13 @@
 class Game
 {
     ScheduleTimer? _timer;
-
+    public Map map = new Map();
     public bool Paused { get; private set; }
     public bool GameOver { get; private set; }
 
     public void Start()
     {
-        Console.WriteLine("Start");
+        map.Board();
         ScheduleNextTick();
     }
 
@@ -39,12 +39,11 @@ class Game
 
     public void Input(ConsoleKey key)
     {
-        Console.WriteLine($"Player pressed key: {key}");
+        map.MoveSnake(key.ToString());
     }
 
     void Tick()
     {
-        Console.WriteLine("Tick");
         ScheduleNextTick();
     }
 

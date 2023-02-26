@@ -1,7 +1,5 @@
 ﻿var game = new Game();
-
 game.Start();
-
 while (!game.GameOver)
 {
     // listen to key presses

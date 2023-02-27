@@ -1,14 +1,19 @@
 ﻿
 class Map
 {
-    public int Y = Console.WindowHeight / 2;
-    public int X = Console.WindowWidth / 2;
+    public Random rand = new Random();
+    public string appleLocationString = "";
+    public bool appleOnMap = false;
+    public int Y = 50;
+    public int X = 100;
     public int snakeLength = 3;
-    public int moveCount = 0;
-    public int[,] map = new int[Console.WindowHeight / 2 - 2, Console.WindowHeight / 2 - 2];
+    public int[,] map = new int[100, 50];
     public string currentDirection = "right";
-    public int headPosX = 1;
+    public int headPosX = 3;
     public int headPosY = 1;
+    public bool initiated = false;
+
+    public List<string> SnakePositions = new List<string>();
 
     public void Board()
     {
@@ -35,26 +40,78 @@ class Map
 
     public void Move()
     {
-        Console.SetCursorPosition(headPosX, headPosY);
-        Console.Write(" ");
-
-        switch (currentDirection)
+        if (!appleOnMap)
         {
-            case "up":
-                headPosY -= 1;
-                break;
-            case "down":
-                headPosY += 1;
-                break;
-            case "left":
-                headPosX -= 1;
-                break;
-            case "right":
-                headPosX += 1;
-                break;
+            CreateApple();
         }
-        Console.SetCursorPosition(headPosX, headPosY);
-        Console.Write("■");
+
+        if (initiated)
+        {
+            string lastPosString = SnakePositions.First();
+            string[] positionsStringArray = lastPosString.Split(" ");
+            int[] positions = new int[2];
+            positions[0] = int.Parse(positionsStringArray[0]);
+            positions[1] = int.Parse(positionsStringArray[1]);
+            Console.SetCursorPosition(positions[0], positions[1]);
+            Console.Write(" ");
+
+            SnakePositions.Remove(lastPosString);
+            for (int i = 0; i < SnakePositions.Count; i++)
+            {
+                string[] StringArray = SnakePositions.ElementAt(i).Split(" ");
+                int[] posArray = new int[2];
+                posArray[0] = int.Parse(StringArray[0]);
+                posArray[1] = int.Parse(StringArray[1]);
+
+                Console.SetCursorPosition(posArray[0], posArray[1]);
+                Console.Write("■");
+            }
+
+            switch (currentDirection)
+            {
+                case "up":
+                    headPosY -= 1;
+                    break;
+                case "down":
+                    headPosY += 1;
+                    break;
+                case "left":
+                    headPosX -= 1;
+                    break;
+                case "right":
+                    headPosX += 1;
+                    break;
+            }
+            Console.SetCursorPosition(headPosX, headPosY);
+            Console.Write(">");
+            SnakePositions.Add($"{headPosX} {headPosY}");
+
+            string[] apple = appleLocationString.Split(" ");
+            int[] pos = new int[2];
+            pos[0] = int.Parse(apple[0]);
+            pos[1] = int.Parse(apple[1]);
+
+            if (pos[0] == headPosX && pos[1] == headPosY)
+            {
+                EatApple();
+            }
+        }
+        else
+        {
+            
+            Console.SetCursorPosition(1, 1);
+            Console.Write("■");
+            SnakePositions.Add($"1 1");
+            Console.SetCursorPosition(1, 2);
+            Console.Write("■");
+            SnakePositions.Add($"1 2");
+            Console.SetCursorPosition(headPosX, headPosY);
+            Console.Write(">");
+            SnakePositions.Add($"{headPosX} {headPosY}");
+            initiated = true;
+            
+        }
+        
     }
 
     public bool collision()
@@ -68,12 +125,12 @@ class Map
         {
             return true;
         }
+
         return false;
     }
 
     public void MoveDirection(string direction)
     {
-        Console.SetCursorPosition(headPosX, headPosY);
         switch (direction)
         {
             case "UpArrow":
@@ -89,5 +146,25 @@ class Map
                 currentDirection = "right";
                 break;
         }
+    }
+
+    public void CreateApple()
+    {
+        int posX = rand.Next(1, X - 2);
+        int posY = rand.Next(1, Y - 2);
+        appleLocationString = $"{posX} {posY}";
+        Console.SetCursorPosition(posX, posY);
+        Console.Write("*");
+        appleOnMap = true;
+    }
+
+    public void EatApple()
+    {
+        string[] firstLocationArray = SnakePositions.ElementAt(0).Split(" ");
+        int[] pos = new int[2];
+        pos[0] = int.Parse(firstLocationArray[0]);
+        pos[1] = int.Parse(firstLocationArray[1]);
+        SnakePositions =  SnakePositions.Prepend($"{pos[0]} {pos[1] - 1}").ToList();
+        appleOnMap = false;
     }
 }

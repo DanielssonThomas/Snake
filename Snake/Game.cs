@@ -19,14 +19,12 @@ class Game
 
     public void Pause()
     {
-        Console.WriteLine("Pause");
         Paused = true;
         _timer!.Pause();
     }
 
     public void Resume()
     {
-        Console.WriteLine("Resume");
         Paused = false;
         _timer!.Resume();
     }

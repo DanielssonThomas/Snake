@@ -1,15 +1,17 @@
 ﻿
+using System;
+
 class Map
 {
     public Random rand = new Random();
     public string appleLocationString = "";
     public bool appleOnMap = false;
     public int Y = 50;
-    public int X = 100;
+    public int X = 50;
     public int snakeLength = 3;
     public int[,] map = new int[100, 50];
     public string currentDirection = "right";
-    public int headPosX = 3;
+    public int headPosX = 4;
     public int headPosY = 1;
     public bool initiated = false;
 
@@ -40,6 +42,7 @@ class Map
 
     public void Move()
     {
+        Console.ForegroundColor = ConsoleColor.Green;
         if (!appleOnMap)
         {
             CreateApple();
@@ -83,7 +86,7 @@ class Map
                     break;
             }
             Console.SetCursorPosition(headPosX, headPosY);
-            Console.Write(">");
+            Console.Write("■");
             SnakePositions.Add($"{headPosX} {headPosY}");
 
             string[] apple = appleLocationString.Split(" ");
@@ -99,14 +102,14 @@ class Map
         else
         {
             
-            Console.SetCursorPosition(1, 1);
-            Console.Write("■");
-            SnakePositions.Add($"1 1");
             Console.SetCursorPosition(1, 2);
             Console.Write("■");
             SnakePositions.Add($"1 2");
+            Console.SetCursorPosition(1, 3);
+            Console.Write("■");
+            SnakePositions.Add($"1 3");
             Console.SetCursorPosition(headPosX, headPosY);
-            Console.Write(">");
+            Console.Write("■");
             SnakePositions.Add($"{headPosX} {headPosY}");
             initiated = true;
             
@@ -124,6 +127,23 @@ class Map
         if (headPosY <= 0 || headPosY >= Y)
         {
             return true;
+        }
+
+        int snakeCannibalismCount = 0;
+        SnakePositions.ForEach(x =>
+        {
+            if (x == $"{headPosX} {headPosY}")
+            {
+                snakeCannibalismCount++;
+            }
+        });
+        if (snakeCannibalismCount == 2)
+        {
+            return true;
+        }
+        else
+        {
+            snakeCannibalismCount = 0;
         }
 
         return false;
@@ -150,11 +170,35 @@ class Map
 
     public void CreateApple()
     {
+        Console.ForegroundColor = ConsoleColor.Red;
+        bool validPos = false;
         int posX = rand.Next(1, X - 2);
         int posY = rand.Next(1, Y - 2);
+
+        while (!validPos)
+        {
+            int updatedCount = 0;
+
+            foreach (var pos in SnakePositions)
+            {
+                if (pos == $"{posX.ToString()} {posY.ToString()}")
+                {
+                    posX = rand.Next(1, X - 2);
+                    posY = rand.Next(1, Y - 2);
+                    updatedCount++;
+                }
+            }
+
+            if (updatedCount == 0)
+            {
+                validPos = true;
+            }
+            
+        }
         appleLocationString = $"{posX} {posY}";
         Console.SetCursorPosition(posX, posY);
         Console.Write("*");
+        Console.ForegroundColor = ConsoleColor.Green;
         appleOnMap = true;
     }
 

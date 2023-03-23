@@ -129,21 +129,21 @@ class Map
             return true;
         }
 
-        int snakeCollisionCount = 0;
+        int snakeCannibalismCount = 0;
         SnakePositions.ForEach(x =>
         {
             if (x == $"{headPosX} {headPosY}")
             {
-                snakeCollisionCount++;
+                snakeCannibalismCount++;
             }
         });
-        if (snakeCollisionCount == 2)
+        if (snakeCannibalismCount == 2)
         {
             return true;
         }
         else
         {
-            snakeCollisionCount = 0;
+            snakeCannibalismCount = 0;
         }
 
         return false;
